@@ -1,0 +1,57 @@
+.project_card{
+    background-color: rgb(43, 43, 43);
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.project_image img{
+    width: 100%;
+}
+
+.project_title{
+    color: aliceblue;
+    padding: 10px 10px;
+    font-size: 22px;
+}
+
+.card_btns{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.git_live{
+    display: flex;
+    width: 80%;
+}
+
+.btn_prjct{
+    width: 40%;
+    background-color: #05FDD8;
+    padding:10px 12px;
+    display: flex;
+    justify-content: center;
+    color: rgb(43, 43, 43);
+    font-size: 17px;
+    border-radius: 2px;
+    margin: 0px 10px;
+    height: 50px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.icon_more{
+    font-size: 55px;
+    color: #05FDD8;
+}
+
+.live{
+    background-color: #FD2155;
+    color: white;
+}
+
+.icon_more:hover{
+    color: "#FD2155";
+    transition-duration: 500ms;
+}
