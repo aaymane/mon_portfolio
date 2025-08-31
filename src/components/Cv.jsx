@@ -1,17 +1,16 @@
-import React from 'react'
-import './cv.css'
-import cvFile from './cv/CV.pdf';
+import React from 'react';
+import './cv.css';
 
 const Cv = () => {
   return (
     <div>
       <div className="fixed-cv-button">
-      <a href={cvFile} target="_blank" rel="noopener noreferrer" download>
-            Download CV
-      </a>
+        <a href="/cv/CV.pdf" target="_blank" rel="noreferrer" download>
+          Download CV
+        </a>
+      </div>
     </div>
-    </div>
-  )
+  );
 }
 
-export default Cv
+export default Cv;
