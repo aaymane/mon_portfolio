@@ -1,15 +1,14 @@
-import React from "react";
+import React, { useEffect, useCallback } from "react";
 import "./AboutMe.css";
 import { motion, useAnimation } from "framer-motion";
 import Cv from "./Cv";
+
 const AboutMe = () => {
   const controls = useAnimation();
 
-  const handleScroll = () => {
-    // Adjust the scroll position where you want the fade-out effect to start
+  // useCallback => la fonction est stable, donc OK pour la dépendance du useEffect
+  const handleScroll = useCallback(() => {
     const scrollY = window.scrollY;
-
-    // Adjust the threshold based on your preference
     const fadeOutThreshold = 200;
 
     if (scrollY > fadeOutThreshold) {
@@ -17,20 +16,18 @@ const AboutMe = () => {
     } else {
       controls.start({ opacity: 1 });
     }
-  };
+  }, [controls]);
 
-  // Add event listener for scroll
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+    // appel initial si besoin
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
 
   const text =
-    "Hey! 👋 I'm Aymane, a Computer Science student at Bordeaux University. Passionate about web development and exploring cloud tech, I code in Java, C++, and more, with an eye on mastering the UI / UX. 💻🌐.".split(
-      " "
-    );
+    "Hey! 👋 I'm Aymane, a Computer Science student at Bordeaux University. Passionate about web development and exploring cloud tech, I code in Java, C++, and more, with an eye on mastering the UI / UX. 💻🌐."
+      .split(" ");
 
   return (
     <div className="bt-hero">
@@ -54,10 +51,7 @@ const AboutMe = () => {
                 <motion.span
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{
-                    duration: 0.25,
-                    delay: i / 10,
-                  }}
+                  transition={{ duration: 0.25, delay: i / 10 }}
                   key={i}
                 >
                   {el}{" "}
@@ -66,6 +60,7 @@ const AboutMe = () => {
             </motion.p>
           </motion.div>
         </div>
+
         <div className="AboutDesc">
           <motion.h2
             className="skill"
@@ -75,6 +70,7 @@ const AboutMe = () => {
           >
             Hi there 👋
           </motion.h2>
+
           <motion.h1
             className="text"
             initial={{ opacity: 0 }}
@@ -82,63 +78,62 @@ const AboutMe = () => {
             transition={{ delay: 2.7, duration: 0.6 }}
           >
             I'm Aymane 💻
-            </motion.h1>
-            <div className="bar">
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: "100%" }}
-                transition={{ delay: 2.7, duration: 1 }}
-                className="title_underline" 
-              ></motion.div>
+          </motion.h1>
+
+          <div className="bar">
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: "100%" }}
+              transition={{ delay: 2.7, duration: 1 }}
+              className="title_underline"
+            />
+          </div>
+
+          <motion.h2
+            className="abt"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 2.9, duration: 0.6 }}
+          >
+            👨‍🦱•💻 About Me
+            <div className="abt-details">
+              <ul>
+                <li><p>- 🤔 Exploring new technologies and building quick hacks.</p></li>
+                <li><p>- 🎓 CS student at Bordeaux University.</p></li>
+                <li><p>- 🌱 Learning Cloud & Systems Design.</p></li>
+                <li><p>- ✍️ Web development as a side hustle.</p></li>
+              </ul>
             </div>
-            <motion.h2
-              className="abt"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 2.9, duration: 0.6 }}
-            >
-              👨‍🦱•💻 About Me
-              <div className="abt-details">
-                <ul>
-                  <li><p> - 🤔   Exploring new technologies and developing software solutions and quick hacks.</p></li>
-                  <li><p> - 🎓   Studying Computer Science and Engineering at Bordeaux University.</p></li>
-                  <li><p> - 🌱   Learning about Cloud Tech, Systems Design.</p></li>
-                  <li><p> - ✍️   Pursuing Web Development as hobbies/side hustles.</p></li>
-                </ul>
-              </div>
-            </motion.h2>
-            <motion.h2
-              className="abt"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 3.2, duration: 0.6 }}
-            >
-              🛠 • Tech Stack
+          </motion.h2>
 
-              <div className="abt-details">
-                <ul>
-                  <li><p> - 💻   Java | C++ | C | MySQL</p></li>
-                  <li><p> - 🌐   HTML | CSS | JavaScript | Bootstrap | PHP</p></li>
-                </ul>
-              </div>
-            </motion.h2>
+          <motion.h2
+            className="abt"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 3.2, duration: 0.6 }}
+          >
+            🛠 • Tech Stack
+            <div className="abt-details">
+              <ul>
+                <li><p>- 💻 Java | C++ | C | MySQL</p></li>
+                <li><p>- 🌐 HTML | CSS | JavaScript | Bootstrap | PHP</p></li>
+              </ul>
+            </div>
+          </motion.h2>
 
-            <motion.h2
-              className="abt"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay:3.5, duration: 0.6 }}
-            >
-              🛠 • To Learn
-
-              <div className="abt-details">
-                <ul>
-                  <li><p>UI/UX Design</p></li>
-                </ul>
-              </div>
-            </motion.h2>
-
-
+          <motion.h2
+            className="abt"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 3.5, duration: 0.6 }}
+          >
+            🛠 • To Learn
+            <div className="abt-details">
+              <ul>
+                <li><p>UI/UX Design</p></li>
+              </ul>
+            </div>
+          </motion.h2>
         </div>
       </motion.div>
     </div>
